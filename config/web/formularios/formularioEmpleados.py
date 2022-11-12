@@ -1,40 +1,42 @@
 from logging import PlaceHolder
 from django import forms
 
-class FormularioRegistroPlatos(forms.Form):
+class FormularioRegistroEmpleados(forms.Form):
 
-    PLATOS=(
-        (1, 'Entrada'),
-        (2, 'Fuerte'),
-        (3, 'Postre'),
-        (4, 'Bebidas')
+    EMPLEADOS=(
+        (1, 'Cocina'),
+        (2, 'Mesa'),
+        (3, 'Admon'),
+        (4, 'Servicio')
     )
 
-    nombrePlato=forms.CharField(
+    nombreEmpleado=forms.CharField(
         widget=forms.TextInput(attrs={"class":"form-control mb-3"}),
         max_length=25,
         required=True,
         label='Nombre:'
     )
-    descripcionPlato=forms.CharField(
+    apellidoEmpleado=forms.CharField(
         widget=forms.Textarea(attrs={"class":"form-control mb-3"}),
         max_length=50,
         required=True,
-        label='Descripción:'
+        label='Apellido:'
     )
-    fotoPlato=forms.CharField(
+    direccionEmpleado=forms.CharField(
         widget=forms.TextInput(attrs={"class":"form-control mb-3"}),
         max_length=200,
         required=True,
-        label='Foto:'
+        label='Dirección:'
     )
-    precioPlato=forms.CharField(
+    documentoEmpleado=forms.CharField(
         widget=forms.NumberInput(attrs={"class":"form-control mb-3"}),
-        required=True
+        required=True,
+        label='Documento:'
+
     )
-    tipoPlato=forms.ChoiceField(
+    rolEmpleado=forms.ChoiceField(
         widget=forms.Select(attrs={"class":"form-control mb-3"}),
-        choices=PLATOS
+        choices=EMPLEADOS
     )
 
     
