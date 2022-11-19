@@ -2,6 +2,8 @@ from django.shortcuts import render
 from web.formularios.formularioPlatos import FormularioRegistroPlatos
 from web.formularios.formularioEmpleados import FormularioRegistroEmpleados
 
+from web.models import Platos, Empleados
+
 # Create your views here.
 
 #CADA VISTA ES UNA FUNCION DE PY
@@ -9,7 +11,7 @@ from web.formularios.formularioEmpleados import FormularioRegistroEmpleados
 def Home(request):
     return render(request,'index.html')
 
-def Platos(request):
+def PlatosVista(request):
 
     #cargar el formulario de registro de platos
     #Instanciar la clase
@@ -26,11 +28,19 @@ def Platos(request):
         datosFormulario=FormularioRegistroPlatos(request.POST)
         if datosFormulario.is_valid():
             datosLimpios=datosFormulario.cleaned_data
-            print(datosLimpios)
+            #ENVIANDO DATOS A MI BASE DE DATOS
+            platoNuevo=Platos(
+                nombre=datosLimpios["nombrePlato"],
+                descripcion=datosLimpios["descripcionPlato"],
+                imagen=datosLimpios["fotoPlato"],
+                precio=datosLimpios["precioPlato"],
+                tipo=datosLimpios["tipoPlato"]
+            )
+            platoNuevo.save()
 
     return render(request,'platos.html',diccionarioEnvioDatos)
 
-def Empleados(request):
+def EmpleadosVista(request):
     #cargar el formulario de registro de empleados
     #Instanciar la clase
     formulario=FormularioRegistroEmpleados()
@@ -46,6 +56,14 @@ def Empleados(request):
         datosFormulario=FormularioRegistroEmpleados(request.POST)
         if datosFormulario.is_valid():
             datosLimpios=datosFormulario.cleaned_data
-            print(datosLimpios)
+            #ENVIANDO DATOS A MI BASE DE DATOS
+            empleadoNuevo=Empleados(
+                nombre=datosLimpios["nombreEmpleado"],
+                apellido=datosLimpios["apellidoEmpleado"],
+                direccion=datosLimpios["direccionEmpleado"],
+                documento=datosLimpios["documentoEmpleado"],
+                rol=datosLimpios["rolEmpleado"]
+            )
+            empleadoNuevo.save()
 
     return render(request,'empleados.html',diccionarioEnvioDatosEmpleados)

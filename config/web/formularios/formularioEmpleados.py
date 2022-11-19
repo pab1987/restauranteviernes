@@ -17,7 +17,7 @@ class FormularioRegistroEmpleados(forms.Form):
         label='Nombre:'
     )
     apellidoEmpleado=forms.CharField(
-        widget=forms.Textarea(attrs={"class":"form-control mb-3"}),
+        widget=forms.TextInput(attrs={"class":"form-control mb-3"}),
         max_length=50,
         required=True,
         label='Apellido:'
